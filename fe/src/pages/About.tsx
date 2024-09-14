@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "/vite.svg";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
