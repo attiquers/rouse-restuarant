@@ -87,7 +87,7 @@ const Menu: React.FC = () => {
                   className="flex text-lg sm:text-2xl text-white w-full sm:w-2/5 justify-between mb-4"
                 >
                   <div>{item.name}</div>
-                  <div className="w-20 text-right">${item.price}</div>{" "}
+                  <div className="w-20 text-left">${item.price}</div>{" "}
                   {/* Ensure $ is directly before the price */}
                 </div>
               ))}

@@ -368,7 +368,7 @@ const Admin: React.FC = () => {
                   <>
                     <div className="flex w-1/4 justify-between ">
                       <span className="text-lg text-gray-800">{item.name}</span>
-                      <span className="text-lg text-gray-600">
+                      <span className="text-lg text-gray-600 w-20">
                         ${item.price}
                       </span>
                     </div>
