@@ -4,15 +4,18 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Navigation from "./pages/Navigation";
-
+import Menu from "./pages/Menu";
+import Admin from "./pages/Admin";
 function App() {
   return (
     <Router>
       <Navigation />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/menu" element={<Menu />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </Router>
   );

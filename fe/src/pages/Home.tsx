@@ -27,12 +27,12 @@ const Home = () => {
       </div>
 
       {/* order */}
-      <div className="h-screen  flex flex-col md:flex-row  md:gap-0">
+      <div className="pb-5 min-h-screen  flex flex-col md:flex-row  md:gap-0">
         <div className="h-1/2 md:h-auto md:w-1/2 overflow-hidden">
           <img src="/showBurger.png" className="w-full object-top" alt="" />
         </div>
         <div className="h-1/2 md:h-auto md:w-1/2 flex flex-col place-content-center items-center text-white">
-          <div className=" w-4/6 text-center text-5xl md:text-7xl font-bold ">
+          <div className="pt-5 w-4/6 text-center text-5xl md:text-7xl font-bold ">
             Crafted for Cravings
           </div>
           <div className="w-4/6 text-2xl text-center pt-6 md:pt-12 pb-6">
