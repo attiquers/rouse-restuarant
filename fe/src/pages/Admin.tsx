@@ -27,7 +27,8 @@ const Admin: React.FC = () => {
   const [itemEditName, setItemEditName] = useState("");
   const [itemEditPrice, setItemEditPrice] = useState("");
 
-  const BACKEND_URI = "http://localhost:5000/api";
+  // const BACKEND_URI = "http://localhost:5000/api/menu";
+  const BACKEND_URI = "https://rouse-be.vercel.app/api/menu";
 
   // Fetch categories from the server
   useEffect(() => {
