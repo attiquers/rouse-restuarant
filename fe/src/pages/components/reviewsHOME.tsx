@@ -177,7 +177,7 @@ export default function ReviewCarousel() {
   }
 
   return (
-    <Carousel className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
+    <Carousel className="pt-20 md:pt-0 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
       <CarouselContent>
         {groupedReviews.map((group, index) => (
           <CarouselItem key={index}>
@@ -209,10 +209,16 @@ export default function ReviewCarousel() {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <div className="h-full">
-        <CarouselPrevious className="rounded-md w-20 h-full p-4 -ml-10" />
-        <CarouselNext className="rounded-md w-20 h-full p-4 -mr-10" />
+      <div className="h-full  md:w-auto absolute -top-60 left-28 md:static ">
+        <CarouselPrevious className="rounded-md w-20 h-20 md:h-full p-4  md:-ml-10" />
+        <CarouselNext className="rounded-md w-20  h-20  md:h-full p-4 -mr-20 md:-mr-10" />
       </div>
+
+      {/* 
+      <div className="h-full w-32 md:w-auto absolute -top-60 left-20 md:relative md:-top-0 md:left-0">
+        <CarouselPrevious className="rounded-md w-full h-20 md:h-full p-4  md:-ml-10" />
+        <CarouselNext className="rounded-md w-full h-20  md:h-full p-4 -mr-10" />
+      </div> */}
     </Carousel>
   );
 }
