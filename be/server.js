@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json()); // For parsing JSON bodies
 app.use(cors({
   origin: 'http://localhost:5173', // Replace with your frontend URL
-  methods: ['GET', 'POST', 'PUT', 'UPDATE'],
+  methods: ['GET', 'POST', 'PUT', 'UPDATE', 'DELETE'],
   allowedHeaders: ['Content-Type']
 }));
 

@@ -13,7 +13,7 @@ interface Category {
   items: Item[];
 }
 
-const App: React.FC = () => {
+const Admin: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [newCategory, setNewCategory] = useState("");
   const [newItemName, setNewItemName] = useState("");
@@ -27,13 +27,13 @@ const App: React.FC = () => {
   const [itemEditName, setItemEditName] = useState("");
   const [itemEditPrice, setItemEditPrice] = useState("");
 
-  const BACKEND_URI = "http://localhost:5000";
+  const BACKEND_URI = "http://localhost:5000/api";
 
   // Fetch categories from the server
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch(`${BACKEND_URI}/api/menu`);
+        const response = await fetch(`${BACKEND_URI}/menu`);
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
         setCategories(data);
@@ -43,12 +43,12 @@ const App: React.FC = () => {
     };
 
     fetchCategories();
-  }, [BACKEND_URI]);
+  }, []);
 
   const addCategory = async () => {
     if (newCategory.trim()) {
       try {
-        const response = await fetch(`${BACKEND_URI}/api/menu`, {
+        const response = await fetch(`${BACKEND_URI}/menu`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -73,7 +73,7 @@ const App: React.FC = () => {
     if (selectedCategory && newItemName.trim() && newItemPrice.trim()) {
       try {
         const response = await fetch(
-          `${BACKEND_URI}/api/menu/${selectedCategory}/items`,
+          `${BACKEND_URI}/menu/${selectedCategory}/items`,
           {
             method: "POST",
             headers: {
@@ -101,22 +101,41 @@ const App: React.FC = () => {
   };
 
   const deleteCategory = async (categoryId: string) => {
-    // Placeholder for delete API call
-    setCategories(categories.filter((category) => category._id !== categoryId));
+    try {
+      const response = await fetch(`${BACKEND_URI}/menu/${categoryId}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) throw new Error("Network response was not ok");
+      setCategories(
+        categories.filter((category) => category._id !== categoryId)
+      );
+    } catch (error) {
+      console.error("Error deleting category:", error);
+    }
   };
 
   const deleteItem = async (categoryId: string, itemId: string) => {
-    // Placeholder for delete API call
-    setCategories(
-      categories.map((category) =>
-        category._id === categoryId
-          ? {
-              ...category,
-              items: category.items.filter((item) => item._id !== itemId),
-            }
-          : category
-      )
-    );
+    try {
+      const response = await fetch(
+        `${BACKEND_URI}/menu/${categoryId}/items/${itemId}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (!response.ok) throw new Error("Network response was not ok");
+      setCategories(
+        categories.map((category) =>
+          category._id === categoryId
+            ? {
+                ...category,
+                items: category.items.filter((item) => item._id !== itemId),
+              }
+            : category
+        )
+      );
+    } catch (error) {
+      console.error("Error deleting item:", error);
+    }
   };
 
   const startEditCategory = (category: Category) => {
@@ -125,15 +144,27 @@ const App: React.FC = () => {
   };
 
   const saveCategoryEdit = async (categoryId: string) => {
-    // Placeholder for edit API call
-    setCategories(
-      categories.map((category) =>
-        category._id === categoryId
-          ? { ...category, category: categoryEditValue }
-          : category
-      )
-    );
-    setEditingCategoryId(null);
+    try {
+      const response = await fetch(`${BACKEND_URI}/menu/${categoryId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          category: categoryEditValue,
+        }),
+      });
+      if (!response.ok) throw new Error("Network response was not ok");
+      const updatedCategory = await response.json();
+      setCategories(
+        categories.map((category) =>
+          category._id === categoryId ? updatedCategory : category
+        )
+      );
+      setEditingCategoryId(null);
+    } catch (error) {
+      console.error("Error updating category:", error);
+    }
   };
 
   const startEditItem = (categoryId: string, item: Item) => {
@@ -143,22 +174,40 @@ const App: React.FC = () => {
   };
 
   const saveItemEdit = async (categoryId: string, itemId: string) => {
-    // Placeholder for edit API call
-    setCategories(
-      categories.map((category) =>
-        category._id === categoryId
-          ? {
-              ...category,
-              items: category.items.map((item) =>
-                item._id === itemId
-                  ? { ...item, name: itemEditName, price: itemEditPrice }
-                  : item
-              ),
-            }
-          : category
-      )
-    );
-    setEditingItemId(null);
+    try {
+      const response = await fetch(
+        `${BACKEND_URI}/menu/${categoryId}/items/${itemId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: itemEditName,
+            price: itemEditPrice,
+          }),
+        }
+      );
+      if (!response.ok) throw new Error("Network response was not ok");
+      const updatedCategory = await response.json();
+      setCategories(
+        categories.map((category) =>
+          category._id === categoryId
+            ? {
+                ...category,
+                items: category.items.map((item) =>
+                  item._id === itemId
+                    ? { ...item, name: itemEditName, price: itemEditPrice }
+                    : item
+                ),
+              }
+            : category
+        )
+      );
+      setEditingItemId(null);
+    } catch (error) {
+      console.error("Error updating item:", error);
+    }
   };
 
   return (
@@ -177,7 +226,7 @@ const App: React.FC = () => {
           value={newCategory}
           onChange={(e) => setNewCategory(e.target.value)}
           placeholder="Category name"
-          className="w-full p-3 border border-gray-300 rounded-lg mb-4"
+          className="w-full p-3 border border-gray-300 rounded-lg bg-white mb-4"
         />
         <button
           onClick={addCategory}
@@ -193,7 +242,7 @@ const App: React.FC = () => {
         <select
           onChange={(e) => setSelectedCategory(e.target.value)}
           value={selectedCategory || ""}
-          className="w-full p-3 border border-gray-300 rounded-lg mb-4"
+          className="w-full p-3 border border-gray-300 bg-white rounded-lg mb-4"
         >
           <option value="" disabled>
             Select Category
@@ -209,14 +258,14 @@ const App: React.FC = () => {
           value={newItemName}
           onChange={(e) => setNewItemName(e.target.value)}
           placeholder="Item name"
-          className="w-full p-3 border border-gray-300 rounded-lg mb-4"
+          className="w-full p-3 border border-gray-300 rounded-lg bg-white mb-4"
         />
         <input
-          type="text"
+          type="number"
           value={newItemPrice}
           onChange={(e) => setNewItemPrice(e.target.value)}
           placeholder="Item price"
-          className="w-full p-3 border border-gray-300 rounded-lg mb-4"
+          className="w-full p-3 border border-gray-300 rounded-lg bg-white mb-4"
         />
         <button
           onClick={addItem}
@@ -236,109 +285,101 @@ const App: React.FC = () => {
         <h2 className="text-2xl font-semibold mb-4 text-gray-700">
           Categories and Items
         </h2>
-        <ul>
-          {categories.map((cat) => (
-            <li key={cat._id} className="mb-4">
-              {editingCategoryId === cat._id ? (
-                <div>
-                  <input
-                    type="text"
-                    value={categoryEditValue}
-                    onChange={(e) => setCategoryEditValue(e.target.value)}
-                    className="w-full p-3 border border-gray-300 rounded-lg mb-4"
-                  />
+        {categories.map((category) => (
+          <div key={category._id} className="mb-6 border-b pb-4">
+            <div className="flex items-center justify-between">
+              {editingCategoryId === category._id ? (
+                <input
+                  type="text"
+                  value={categoryEditValue}
+                  onChange={(e) => setCategoryEditValue(e.target.value)}
+                  className="w-1/2 p-2 border border-gray-300 rounded-lg mr-4 bg-white"
+                />
+              ) : (
+                <h3 className="text-xl font-semibold text-gray-800">
+                  {category.category}
+                </h3>
+              )}
+              <div>
+                {editingCategoryId === category._id ? (
                   <button
-                    onClick={() => saveCategoryEdit(cat._id)}
-                    className="mr-2 bg-blue-500 text-white py-1 px-4 rounded-lg"
+                    onClick={() => saveCategoryEdit(category._id)}
+                    className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
                   >
                     Save
                   </button>
+                ) : (
                   <button
-                    onClick={() => setEditingCategoryId(null)}
-                    className="bg-gray-500 text-white py-1 px-4 rounded-lg"
+                    onClick={() => startEditCategory(category)}
+                    className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 mr-2"
                   >
-                    Cancel
+                    Edit
                   </button>
-                </div>
-              ) : (
-                <div className="flex justify-between items-center">
-                  <h3 className="text-xl font-semibold text-gray-800">
-                    {cat.category}
-                  </h3>
-                  <div>
+                )}
+                <button
+                  onClick={() => deleteCategory(category._id)}
+                  className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+            {category.items.map((item) => (
+              <div
+                key={item._id}
+                className="flex items-center justify-between mt-4"
+              >
+                {editingItemId === item._id ? (
+                  <>
+                    <input
+                      type="text"
+                      value={itemEditName}
+                      onChange={(e) => setItemEditName(e.target.value)}
+                      className="w-1/4 p-2 border border-gray-300 rounded-lg mr-4 bg-white"
+                    />
+                    <input
+                      type="number"
+                      value={itemEditPrice}
+                      onChange={(e) => setItemEditPrice(e.target.value)}
+                      className="w-1/4 p-2 border border-gray-300 rounded-lg bg-white"
+                    />
+                  </>
+                ) : (
+                  <>
+                    <span className="text-lg text-gray-800">{item.name}</span>
+                    <span className="text-lg text-gray-600">${item.price}</span>
+                  </>
+                )}
+                <div>
+                  {editingItemId === item._id ? (
                     <button
-                      onClick={() => startEditCategory(cat)}
-                      className="mr-2 bg-yellow-500 text-white py-1 px-4 rounded-lg"
+                      onClick={() => saveItemEdit(category._id, item._id)}
+                      className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
+                    >
+                      Save
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => startEditItem(category._id, item)}
+                      className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 mr-2"
                     >
                       Edit
                     </button>
-                    <button
-                      onClick={() => deleteCategory(cat._id)}
-                      className="bg-red-500 text-white py-1 px-4 rounded-lg"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              <ul className="ml-4 mt-2">
-                {cat.items.map((item) => (
-                  <li
-                    key={item._id}
-                    className="mb-2 flex justify-between items-center"
+                  )}
+                  <button
+                    onClick={() => deleteItem(category._id, item._id)}
+                    className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
                   >
-                    {editingItemId === item._id ? (
-                      <div>
-                        <input
-                          type="text"
-                          value={itemEditName}
-                          onChange={(e) => setItemEditName(e.target.value)}
-                          className="p-2 border border-gray-300 rounded-lg mr-2"
-                        />
-                        <input
-                          type="text"
-                          value={itemEditPrice}
-                          onChange={(e) => setItemEditPrice(e.target.value)}
-                          className="p-2 border border-gray-300 rounded-lg mr-2"
-                        />
-                        <button
-                          onClick={() => saveItemEdit(cat._id, item._id)}
-                          className="bg-blue-500 text-white py-1 px-4 rounded-lg"
-                        >
-                          Save
-                        </button>
-                      </div>
-                    ) : (
-                      <div className="flex justify-between w-full">
-                        <div className="flex-1">
-                          {item.name} - ${item.price}
-                        </div>
-                        <div>
-                          <button
-                            onClick={() => startEditItem(cat._id, item)}
-                            className="mr-2 bg-yellow-500 text-white py-1 px-4 rounded-lg"
-                          >
-                            Edit
-                          </button>
-                          <button
-                            onClick={() => deleteItem(cat._id, item._id)}
-                            className="bg-red-500 text-white py-1 px-4 rounded-lg"
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ul>
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
     </div>
   );
 };
 
-export default App;
+export default Admin;
