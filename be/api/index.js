@@ -2,18 +2,19 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require('cors');
 const dotenv = require("dotenv");
-const menuRoutes = require("./routes/menuRoutes");
-const itemRoutes = require("./routes/itemRoutes"); // Import the new item routes
+const menuRoutes = require("../routes/menuRoutes");
+const itemRoutes = require("../routes/itemRoutes"); // Import the new item routes
 
 dotenv.config();
 
 const app = express();
 app.use(express.json()); // For parsing JSON bodies
-app.use(cors({
-  origin: 'http://localhost:5173', // Replace with your frontend URL
-  methods: ['GET', 'POST', 'PUT', 'UPDATE', 'DELETE'],
-  allowedHeaders: ['Content-Type']
-}));
+// app.use(cors({
+//   origin: 'http://localhost:5173', // Replace with your frontend URL
+//   methods: ['GET', 'POST', 'PUT', 'UPDATE', 'DELETE'],
+//   allowedHeaders: ['Content-Type']
+// }));
+app.use(cors())
 
 
 // Connect to MongoDB
