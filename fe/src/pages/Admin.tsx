@@ -26,6 +26,8 @@ const Admin: React.FC = () => {
   const [categoryEditValue, setCategoryEditValue] = useState("");
   const [itemEditName, setItemEditName] = useState("");
   const [itemEditPrice, setItemEditPrice] = useState("");
+  const [itemOldPrice, setItemOldPrice] = useState("");
+  const [itemOldName, setItemOldName] = useState("");
 
   // const BACKEND_URI = "http://localhost:5000/api";
   const BACKEND_URI = "https://rouse-be.vercel.app/api";
@@ -169,12 +171,18 @@ const Admin: React.FC = () => {
   };
 
   const startEditItem = (item: Item) => {
+    setItemOldPrice(item.price);
+    setItemOldName(item.name);
+
     setEditingItemId(item._id);
     setItemEditName(item.name);
     setItemEditPrice(item.price);
   };
 
   const saveItemEdit = async (categoryId: string, itemId: string) => {
+    if (itemEditName == itemOldName && itemEditPrice === itemOldPrice) {
+      setEditingItemId(null);
+    }
     try {
       const response = await fetch(
         `${BACKEND_URI}/menu/${categoryId}/items/${itemId}`,
@@ -282,7 +290,7 @@ const Admin: React.FC = () => {
 
       {/* Category and Item List Section */}
       <div className="p-6 bg-white shadow-lg rounded-lg">
-        <h2 className="text-2xl font-semibold mb-4 text-gray-700">
+        <h2 className="text-4xl font-semibold mb-4 text-gray-700">
           Categories and Items
         </h2>
         {categories.map((category) => (
@@ -296,8 +304,8 @@ const Admin: React.FC = () => {
                   className="w-1/2 p-2 border border-gray-300 rounded-lg mr-4 bg-white"
                 />
               ) : (
-                <h3 className="text-xl font-semibold text-gray-800">
-                  {category.category}
+                <h3 className="text-2xl font-semibold text-gray-800">
+                  {category.category.toUpperCase()}
                 </h3>
               )}
               <div>
@@ -330,7 +338,7 @@ const Admin: React.FC = () => {
                   {editingItemId === item._id ? (
                     <button
                       onClick={() => saveItemEdit(category._id, item._id)}
-                      className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
+                      className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
                     >
                       Save
                     </button>
