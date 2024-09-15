@@ -27,8 +27,8 @@ const Admin: React.FC = () => {
   const [itemEditName, setItemEditName] = useState("");
   const [itemEditPrice, setItemEditPrice] = useState("");
 
-  // const BACKEND_URI = "http://localhost:5000/api/menu";
-  const BACKEND_URI = "https://rouse-be.vercel.app/api/menu";
+  // const BACKEND_URI = "http://localhost:5000/api/";
+  const BACKEND_URI = "https://rouse-be.vercel.app/api/";
 
   // Fetch categories from the server
   useEffect(() => {
@@ -49,7 +49,7 @@ const Admin: React.FC = () => {
   const addCategory = async () => {
     if (newCategory.trim()) {
       try {
-        const response = await fetch(`${BACKEND_URI}/menu`, {
+        const response = await fetch(`${BACKEND_URI}/`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
