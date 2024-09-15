@@ -10,7 +10,8 @@ export default {
   			sm: 'calc(var(--radius) - 4px)'
   		},
 		  fontFamily: {
-			categoryFont: ['"Times New Roman"', 'serif']
+			categoryFont: ['"Times New Roman"', 'serif'],
+			mono: ['Fira Code', 'Courier', 'monospace'], // Add your font here
 		},
   		colors: {
   			background: 'hsl(var(--background))',

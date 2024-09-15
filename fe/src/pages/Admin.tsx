@@ -167,7 +167,7 @@ const Admin: React.FC = () => {
     }
   };
 
-  const startEditItem = (categoryId: string, item: Item) => {
+  const startEditItem = (item: Item) => {
     setEditingItemId(item._id);
     setItemEditName(item.name);
     setItemEditPrice(item.price);
@@ -189,7 +189,6 @@ const Admin: React.FC = () => {
         }
       );
       if (!response.ok) throw new Error("Network response was not ok");
-      const updatedCategory = await response.json();
       setCategories(
         categories.map((category) =>
           category._id === categoryId
@@ -287,7 +286,7 @@ const Admin: React.FC = () => {
         </h2>
         {categories.map((category) => (
           <div key={category._id} className="mb-6 border-b pb-4">
-            <div className="flex items-center justify-between">
+            <div className="flex  items-center justify-between">
               {editingCategoryId === category._id ? (
                 <input
                   type="text"
@@ -325,10 +324,30 @@ const Admin: React.FC = () => {
               </div>
             </div>
             {category.items.map((item) => (
-              <div
-                key={item._id}
-                className="flex items-center justify-between mt-4"
-              >
+              <div key={item._id} className="flex items-center  gap-10 mt-4">
+                <div>
+                  {editingItemId === item._id ? (
+                    <button
+                      onClick={() => saveItemEdit(category._id, item._id)}
+                      className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
+                    >
+                      Save
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => startEditItem(item)}
+                      className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 mr-2"
+                    >
+                      Edit
+                    </button>
+                  )}
+                  <button
+                    onClick={() => deleteItem(category._id, item._id)}
+                    className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+                  >
+                    Delete
+                  </button>
+                </div>
                 {editingItemId === item._id ? (
                   <>
                     <input
@@ -346,33 +365,14 @@ const Admin: React.FC = () => {
                   </>
                 ) : (
                   <>
-                    <span className="text-lg text-gray-800">{item.name}</span>
-                    <span className="text-lg text-gray-600">${item.price}</span>
+                    <div className="flex w-1/4 justify-between ">
+                      <span className="text-lg text-gray-800">{item.name}</span>
+                      <span className="text-lg text-gray-600">
+                        ${item.price}
+                      </span>
+                    </div>
                   </>
                 )}
-                <div>
-                  {editingItemId === item._id ? (
-                    <button
-                      onClick={() => saveItemEdit(category._id, item._id)}
-                      className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
-                    >
-                      Save
-                    </button>
-                  ) : (
-                    <button
-                      onClick={() => startEditItem(category._id, item)}
-                      className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 mr-2"
-                    >
-                      Edit
-                    </button>
-                  )}
-                  <button
-                    onClick={() => deleteItem(category._id, item._id)}
-                    className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
-                  >
-                    Delete
-                  </button>
-                </div>
               </div>
             ))}
           </div>
