@@ -21,7 +21,7 @@ const Navigation = () => {
 
       {/* Navbar */}
       <div
-        className={`z-[20] fixed top-0 left-0 w-full h-full bg-[#d4a808] transition-transform duration-300 ease-in-out ${
+        className={`z-[20] fixed top-0 left-0 w-full h-full bg-[#d4a808] transition-transform duration-1000 ease-in-out ${
           isOpen ? "translate-y-0" : "-translate-y-[120%]"
         }`}
       >

@@ -4,7 +4,7 @@ const Home = () => {
   return (
     <div className="pt-32">
       {/* hero */}
-      <div className="min-h-[70svh] pt-20 md:pt-0">
+      <div className="pb-20 min-h-[70svh] pt-20 md:pt-0">
         <div className="text-white text-center">
           <div className="text-4xl font-bold ">Wyoming's Tastiest</div>
           <div className="text-[5rem] md:text-[10rem] leading-3 pt-8 md:pt-16 pb-8 font-bold">
@@ -27,9 +27,13 @@ const Home = () => {
       </div>
 
       {/* order */}
-      <div className="pb-5 min-h-screen  flex flex-col md:flex-row  md:gap-0">
-        <div className="h-1/2 md:h-auto md:w-1/2 overflow-hidden">
-          <img src="/showBurger.png" className="w-full object-top" alt="" />
+      <div className="min-h-screen  flex flex-col md:flex-row  md:gap-0">
+        <div className="h-1/2 md:h-full md:w-1/2 overflow-hidden ">
+          <img
+            src="/showBurger.png"
+            className="w-full object-top object-cover "
+            alt=""
+          />
         </div>
         <div className="h-1/2 md:h-auto md:w-1/2 flex flex-col place-content-center items-center text-white">
           <div className="pt-5 w-4/6 text-center text-5xl md:text-7xl font-bold ">
