@@ -99,12 +99,12 @@ const Order: React.FC = () => {
           <div className="text-2xl text-white">ROUSE's</div>
         </div>
         <div className="text-4xl sm:text-7xl text-secondaryColor font-bold">
-          Menu
+          Order
         </div>
       </div>
       {/* Extra Notes */}
-      <div className=" sm:p-14 sm:pt-0">
-        <label className="block text-2xl font-bold text-secondaryColor">
+      <div className="p-4 sm:p-14 sm:pt-0">
+        <label className="block sm:text-2xl text-xl font-bold text-secondaryColor">
           Extra Note:
         </label>
         <textarea
