@@ -153,15 +153,19 @@ const Order: React.FC = () => {
                   <div className="flex items-center gap-2">
                     <input
                       type="number"
-                      className="w-20 text-black p-2 bg-[#a09add] "
+                      className={`w-20 text-black p-2 bg-[#a09add] ${
+                        !checkedItems[item.name]
+                          ? "text-gray-500 bg-gray-700"
+                          : ""
+                      }`}
                       min="1"
                       defaultValue="1"
-                      onChange={(e) =>
-                        handleQuantityChange(
-                          item.name,
-                          parseInt(e.target.value)
-                        )
-                      }
+                      onChange={(e) => {
+                        const value = parseInt(e.target.value);
+                        if (!isNaN(value) && value > 0) {
+                          handleQuantityChange(item.name, value);
+                        }
+                      }}
                       disabled={!checkedItems[item.name]}
                     />
                     <div className="w-20 text-left">${item.price}</div>
@@ -178,12 +182,37 @@ const Order: React.FC = () => {
         <h3 className="text-primary text-xl font-bold">Order Summary</h3>
         {selectedItems.length > 0 ? (
           <div className="text-primary">
-            {selectedItems.map((item, idx) => (
-              <div key={idx}>
-                {item.quantity}x {item.name}
-              </div>
-            ))}
+            {selectedItems.map((item, idx) => {
+              const itemPrice = menuData
+                .flatMap((category) => category.items)
+                .find((menuItem) => menuItem.name === item.name)?.price;
+
+              const totalItemCost = itemPrice
+                ? item.quantity * parseFloat(itemPrice)
+                : 0;
+
+              return (
+                <div key={idx}>
+                  {item.quantity}x {item.name} (${totalItemCost.toFixed(2)})
+                </div>
+              );
+            })}
             {extraNote && <div className="mt-2">Note: {extraNote}</div>}
+            <div className="mt-4 font-bold">
+              Total Cost: $
+              {selectedItems
+                .reduce((acc, item) => {
+                  const itemPrice = menuData
+                    .flatMap((category) => category.items)
+                    .find((menuItem) => menuItem.name === item.name)?.price;
+
+                  return (
+                    acc +
+                    (itemPrice ? item.quantity * parseFloat(itemPrice) : 0)
+                  );
+                }, 0)
+                .toFixed(2)}
+            </div>
             <div className="mt-4">
               <button className="bg-blue-500 text-white py-2 px-4 rounded">
                 Place Order
