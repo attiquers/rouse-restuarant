@@ -22,7 +22,7 @@ const Home = () => {
           Find Rouse Restaurant
         </div>
         <div>
-          <SecondaryButton name="Locations" link="https://example.com" />
+          <SecondaryButton name="Locations" link="contact" local={true} />
         </div>
       </div>
 
@@ -44,7 +44,7 @@ const Home = () => {
             hit the spot. Whether classic or creative, each one is a feast for
             the senses
           </div>
-          <PrimaryButton name="Order Now" link="https://example.com" />
+          <PrimaryButton name="Order Now" link="order" local={true} />
         </div>
       </div>
 
@@ -52,7 +52,7 @@ const Home = () => {
       <div className="px-14 md:px-0 bg-white gap-4 md:gap-10 text-2xl font-bold text-background flex flex-col md:flex-row place-content-center items-center py-10">
         <div className="text-center md:text-start">See our delicious menu</div>
         <div>
-          <SecondaryButton name="Open Menu" link="https://example.com" />
+          <SecondaryButton name="Open Menu" link="menu" local={true} />
         </div>
       </div>
 

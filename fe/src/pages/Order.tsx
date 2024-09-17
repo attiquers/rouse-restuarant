@@ -135,7 +135,7 @@ const Order: React.FC = () => {
                   <div className="flex items-center gap-2">
                     <input
                       type="checkbox"
-                      className="w-8 aspect-square"
+                      className="w-8 aspect-square accent-secondaryColor"
                       checked={!!checkedItems[item.name]}
                       onChange={(e) =>
                         handleItemChange(item.name, e.target.checked)

@@ -32,12 +32,12 @@ const Navigation = () => {
           <X className="text-background w-10 h-10 " />
         </div>
         <div className="flex h-full justify-between p-10">
-          <ul className="flex flex-col pt-24 text-6xl md:text-8xl text-background font-extrabold h-full space-y-8">
+          <ul className="flex flex-col pt-24 text-5xl md:text-7xl text-background font-extrabold h-full space-y-8">
             <li>
               <div className="relative">
                 <img
                   src="/line.svg"
-                  className="absolute z-[-10] w-40 -mt-12 md:-mt-8"
+                  className="absolute z-[-10] w-40 -mt-12 md:-mt-10"
                   alt=""
                 />
               </div>
@@ -49,27 +49,12 @@ const Navigation = () => {
                 Home
               </Link>
             </li>
+
             <li>
               <div className="relative">
                 <img
                   src="/line.svg"
-                  className="absolute z-[-10] w-40 -mt-12 md:-mt-8"
-                  alt=""
-                />
-              </div>
-              <Link
-                to="order"
-                className="block bg-[#d4a808] hover:translate-x-20 transition-transform duration-300"
-                onClick={closeNavbar}
-              >
-                Order
-              </Link>
-            </li>
-            <li>
-              <div className="relative">
-                <img
-                  src="/line.svg"
-                  className="absolute z-[-10] w-40 -mt-12 md:-mt-8"
+                  className="absolute z-[-10] w-40 -mt-12 md:-mt-10"
                   alt=""
                 />
               </div>
@@ -85,7 +70,39 @@ const Navigation = () => {
               <div className="relative">
                 <img
                   src="/line.svg"
-                  className="absolute z-[-10] w-40 -mt-12 md:-mt-8"
+                  className="absolute z-[-10] w-40 -mt-12 md:-mt-10"
+                  alt=""
+                />
+              </div>
+              <Link
+                to="order"
+                className="block bg-[#d4a808] hover:translate-x-20 transition-transform duration-300"
+                onClick={closeNavbar}
+              >
+                Order
+              </Link>
+            </li>
+            <li>
+              <div className="relative">
+                <img
+                  src="/line.svg"
+                  className="absolute z-[-10] w-40 -mt-12 md:-mt-10"
+                  alt=""
+                />
+              </div>
+              <Link
+                to="contact"
+                className="block bg-[#d4a808] hover:translate-x-20 transition-transform duration-300"
+                onClick={closeNavbar}
+              >
+                Contact
+              </Link>
+            </li>
+            <li>
+              <div className="relative">
+                <img
+                  src="/line.svg"
+                  className="absolute z-[-10] w-40 -mt-12 md:-mt-10"
                   alt=""
                 />
               </div>

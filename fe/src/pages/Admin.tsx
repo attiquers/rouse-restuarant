@@ -257,7 +257,7 @@ const Admin: React.FC = () => {
           </option>
           {categories.map((cat) => (
             <option key={cat._id} value={cat._id}>
-              {cat.category}
+              {cat.category.toUpperCase()}
             </option>
           ))}
         </select>

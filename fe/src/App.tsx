@@ -6,6 +6,7 @@ import Navigation from "./pages/Navigation";
 import Order from "./pages/Order";
 import Menu from "./pages/Menu";
 import Admin from "./pages/Admin";
+import Contact from "./pages/Contact";
 function App() {
   return (
     <Router>
@@ -16,6 +17,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/order" element={<Order />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </Router>
   );
