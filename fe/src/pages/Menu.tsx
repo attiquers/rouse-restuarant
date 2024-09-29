@@ -16,7 +16,7 @@ const Menu: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  //const BACKEND_URI = "http://localhost:5000/api/menu";
+  // const BACKEND_URI = "http://localhost:5000/api/menu";
   const BACKEND_URI = "https://rouse-be.vercel.app/api/menu";
 
   useEffect(() => {

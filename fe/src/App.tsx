@@ -7,6 +7,9 @@ import Order from "./pages/Order";
 import Menu from "./pages/Menu";
 import Admin from "./pages/Admin";
 import Contact from "./pages/Contact";
+import TrackOrder from "./pages/TrackOrder";
+import AdminOrders from "./pages/AdminOrders";
+import AdminMenu from "./pages/AdminMenu";
 function App() {
   return (
     <Router>
@@ -16,8 +19,11 @@ function App() {
         <Route path="/menu" element={<Menu />} />
         <Route path="/about" element={<About />} />
         <Route path="/order" element={<Order />} />
-        <Route path="/admin" element={<Admin />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/trackOrder" element={<TrackOrder />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/admin/orders" element={<AdminOrders />} />
+        <Route path="/admin/menu" element={<AdminMenu />} />
       </Routes>
     </Router>
   );

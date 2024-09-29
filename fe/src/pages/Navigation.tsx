@@ -111,7 +111,7 @@ const Navigation = () => {
                 className="block bg-[#d4a808] hover:translate-x-20 transition-transform duration-300"
                 onClick={closeNavbar}
               >
-                Update Menu
+                Admin Controls
               </Link>
             </li>
           </ul>

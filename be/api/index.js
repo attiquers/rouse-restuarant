@@ -4,7 +4,7 @@ const cors = require('cors');
 const dotenv = require("dotenv");
 const menuRoutes = require("../routes/menuRoutes");
 const itemRoutes = require("../routes/itemRoutes"); // Import the new item routes
-
+const orderRoutes = require("../routes/orderRoutes")
 dotenv.config();
 
 const app = express();
@@ -29,6 +29,7 @@ db.once("open", () => console.log("Connected to Database"));
 // Use the routes
 app.use("/api", menuRoutes);
 app.use("/api", itemRoutes); // Use item routes
+app.use("/api", orderRoutes); // Use item routes
 
 app.get("/", async (req, res) => {
   try {

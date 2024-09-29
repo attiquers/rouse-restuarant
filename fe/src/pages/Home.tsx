@@ -12,7 +12,7 @@ const Home = () => {
           </div>
         </div>
         <div className="flex place-content-center pb-">
-          <img src="/burger.png" alt="burger" className="w-3/4" />
+          <img src="/burger.webp" alt="burger" className="w-3/4" />
         </div>
       </div>
 
@@ -30,7 +30,7 @@ const Home = () => {
       <div className="min-h-screen  flex flex-col md:flex-row  md:gap-0">
         <div className="h-1/2 md:h-full md:w-1/2 overflow-hidden ">
           <img
-            src="/showBurger.png"
+            src="/showBurger.webp"
             className="w-full object-top object-cover "
             alt=""
           />
@@ -59,7 +59,7 @@ const Home = () => {
       {/* reviews */}
       <div className="relative h-screen overflow-hidden  flex">
         <img
-          src="/showBurger.png"
+          src="/showBurger.webp"
           className="absolute h-full md:h-auto md:w-full object-top opacity-10"
           alt=""
         />
@@ -77,7 +77,7 @@ const Home = () => {
       {/* footer */}
       <div className="relative md:h-[70svh] bg-[#232222] overflow-hidden pb-10 md:pb-0">
         <img
-          src="/location.png"
+          src="/location.webp"
           className="z-0 w-full h-full absolute object-cover opacity-[0.01]"
           alt=""
         />
@@ -105,7 +105,7 @@ const Home = () => {
             <div className="absolute top-24 -left-14 bg-background text-white px-4 py-2 rounded-2xl rounded-br-none text-3xl items-start">
               Want a bite?
             </div>
-            <img src="/holdingBurger.png" className="md:h-5/6" alt="" />
+            <img src="/holdingBurger.webp" className="md:h-5/6" alt="" />
           </div>
         </div>
       </div>
