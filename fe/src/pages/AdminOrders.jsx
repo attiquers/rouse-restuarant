@@ -179,7 +179,8 @@ const AdminOrders = () => {
   const handleUpdateOrder = async (orderId, updatedData) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/orders/${orderId}`,
+
+        `${BACKEND_URI}/orders/${orderId}`,
         {
           method: "PUT",
           headers: {
