@@ -7,7 +7,9 @@ import Order from "./pages/Order";
 import Menu from "./pages/Menu";
 import Admin from "./pages/Admin";
 import Contact from "./pages/Contact";
+// @ts-ignore
 import TrackOrder from "./pages/TrackOrder";
+// @ts-ignore
 import AdminOrders from "./pages/AdminOrders";
 import AdminMenu from "./pages/AdminMenu";
 function App() {
