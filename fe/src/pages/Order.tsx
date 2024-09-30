@@ -399,7 +399,7 @@ const Order: React.FC = () => {
           placed. You will receive a confirmation email/call from us.
         </p>
         <Link
-          to={"/strackOrder"}
+          to={"/trackOrder"}
           className="mt-4 text-2xl text-secondaryColor border-secondaryColor border-2 px-6 py-2 rounded-md active:bg-secondaryColor hover:bg-secondaryColor active:text-white hover:text-white transition-all"
         >
           Track your order
