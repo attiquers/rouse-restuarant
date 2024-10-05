@@ -271,7 +271,10 @@ const AdminMenu: React.FC = () => {
       {confirmDelete && itemToDelete && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
           <div className="bg-white rounded-lg p-6 shadow-lg">
-            <h2 className="text-xl font-semibold mb-4">Confirm Deletion</h2>
+            <h2 className="text-xl font-semibold mb-4">
+              Confirm
+              {itemToDelete.itemId ? " item" : " whole Category"} deletion?
+            </h2>
             <p>
               Are you sure you want to delete{" "}
               {itemToDelete.itemId
@@ -280,9 +283,9 @@ const AdminMenu: React.FC = () => {
                     ?.items.find((item) => item._id === itemToDelete.itemId)
                     ?.name
                 : categories.find((cat) => cat._id === itemToDelete.categoryId)
-                    ?.category}
-              ?
+                    ?.category}{" "}
             </p>
+
             <div className="flex justify-end mt-4">
               <button
                 onClick={cancelDelete}
@@ -308,7 +311,7 @@ const AdminMenu: React.FC = () => {
           value={newCategory}
           onChange={(e) => setNewCategory(e.target.value)}
           placeholder="New category name"
-          className="border p-2 w-full bg-white py-2"
+          className="border p-2 w-full bg-white py-2 rounded-md"
         />
         <button
           onClick={addCategory}
