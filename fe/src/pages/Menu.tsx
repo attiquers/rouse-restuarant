@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import {
   Plus,
   Minus,
-  Check,
+  Loader2,
   X,
   LucideShoppingBag,
   ArrowRight,
 } from "lucide-react"; // Import the X icon
+import { Link } from "react-router-dom";
 
 interface Item {
   name: string;
@@ -130,10 +131,6 @@ const Menu: React.FC = () => {
     0
   );
 
-  if (loading) {
-    return <div className="text-white text-center">Loading...</div>;
-  }
-
   if (error) {
     return <div className="text-white text-center">Error: {error}</div>;
   }
@@ -152,6 +149,14 @@ const Menu: React.FC = () => {
           Menu
         </div>
       </div>
+
+      {loading ? (
+        <div className="absolute inset-0 flex items-center justify-center h-screen w-screen">
+          <Loader2 className="animate-spin text-secondaryColor w-20 h-20 " />
+        </div>
+      ) : (
+        ""
+      )}
 
       {/* Menu Categories */}
       <div>
@@ -192,10 +197,13 @@ const Menu: React.FC = () => {
             </div>
           )}
 
-          <div className="justify-between cursor-pointer text-[0.8rem] md:text-lg bg-blue-600 px-4 py-1 rounded-lg  hover:opacity-85 flex place-items-center">
+          <Link
+            to="/checkout"
+            className="justify-between cursor-pointer text-[0.8rem] md:text-lg bg-blue-600 px-4 py-1 rounded-lg  hover:opacity-85 flex place-items-center"
+          >
             <div>Check Out</div>
             <ArrowRight />
-          </div>
+          </Link>
         </div>
 
         {menuData.map((category, index) => (

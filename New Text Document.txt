@@ -1,8 +1,3 @@
-delete confirmation, delete button far
 order placed
-ascending orders
 buttons visible
-margins for pricing
 ADd cart page and add + icon on menu items and then they can change quanity in cart page and add contact info
-
-put seeorder above update menu, make button

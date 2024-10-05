@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import {Loader2 } from 'lucide-react'
 
 // Modal Component for showing ordered items
 const OrderItemsModal = ({ show, handleClose, orderItems }) => {
@@ -118,7 +119,7 @@ const AdminOrders = () => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
-
+  const [loading, setLoading] = useState(true);
 
   // const BACKEND_URI = "http://localhost:5000/api";
   const BACKEND_URI = "https://rouse-be.vercel.app/api";
@@ -143,6 +144,7 @@ const AdminOrders = () => {
         });
 
         setOrders(sortedOrders); // Set the fetched and sorted orders to state
+        setLoading(false);
       } catch (err) {
         setError(err.message); // Set error message in case of failure
       }
@@ -208,11 +210,16 @@ const AdminOrders = () => {
 
   return (
     <div className="bg-gray-200 p-6">
-      <h1 className="text-4xl text-secondaryColor font-bold mb-6">
+      <h1 className="text-4xl text-center font-bold mb-6">
         All Orders
       </h1>
       {error && <p className="text-red-500 mb-4">{error}</p>}
 
+      {loading? 
+        <div className="absolute inset-0 flex items-center justify-center h-screen w-screen">
+          <Loader2 className="animate-spin text-secondaryColor w-20 h-20 "/>
+        </div>
+       :''}
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-200">
           <thead className="bg-gray-100">

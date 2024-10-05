@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Loader2 } from "lucide-react";
 
 interface Item {
   _id: string;
@@ -14,6 +15,7 @@ interface Category {
 }
 
 const AdminMenu: React.FC = () => {
+  const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState<Category[]>([]);
   const [newCategory, setNewCategory] = useState("");
   const [newItems, setNewItems] = useState<{
@@ -48,6 +50,8 @@ const AdminMenu: React.FC = () => {
         const response = await fetch(`${BACKEND_URI}/menu`);
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
+        setLoading(false);
+
         setCategories(data);
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -261,11 +265,24 @@ const AdminMenu: React.FC = () => {
     }));
   };
 
+  // if (loading) {
+  //   return (
+
+  //   );
+  // }
+
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
         Category and Item Manager
       </h1>
+      {loading ? (
+        <div className="absolute inset-0 flex items-center justify-center h-screen w-screen">
+          <Loader2 className="animate-spin text-secondaryColor w-20 h-20 " />
+        </div>
+      ) : (
+        ""
+      )}
 
       {/* Confirmation Modal */}
       {confirmDelete && itemToDelete && (

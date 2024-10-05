@@ -12,6 +12,8 @@ import TrackOrder from "./pages/TrackOrder";
 // @ts-ignore
 import AdminOrders from "./pages/AdminOrders";
 import AdminMenu from "./pages/AdminMenu";
+import CheckOut from "./pages/CheckOut";
+import Success from "./pages/Success";
 function App() {
   return (
     <Router>
@@ -21,6 +23,8 @@ function App() {
         <Route path="/menu" element={<Menu />} />
         <Route path="/about" element={<About />} />
         <Route path="/order" element={<Order />} />
+        <Route path="/checkout" element={<CheckOut />} />
+        <Route path="/success" element={<Success />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/trackOrder" element={<TrackOrder />} />
         <Route path="/admin" element={<Admin />} />

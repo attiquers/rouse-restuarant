@@ -18,14 +18,18 @@ const TrackOrder = () => {
           email
         )}&customText=${encodeURIComponent(customText)}`
       );
-
+  
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message);
       }
-
-      const ordersData = await response.json();
-      setOrders(ordersData); // Set the fetched orders to state
+  
+      let ordersData = await response.json();
+      
+      // Sort orders by orderDate in descending order (most recent date and time first)
+      ordersData = ordersData.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate));
+  
+      setOrders(ordersData); // Set the sorted orders to state
       setErrorMessage(""); // Clear any previous error messages
     } catch (error) {
       setErrorMessage(error.message);
@@ -33,6 +37,7 @@ const TrackOrder = () => {
       setOrders([]); // Clear orders in case of an error
     }
   };
+  
 
   const formatOrderItems = (items) => {
     return items

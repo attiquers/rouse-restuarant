@@ -17,16 +17,16 @@ const Admin = () => {
 
       <div className="w-96  px-14 text-4xl flex flex-col gap-4 ">
         <Link
-          to={"menu"}
-          className="w-full px-4 py-2  rounded-lg border-2 border-secondaryColor text-secondaryColor hover:bg-secondaryColor hover:text-primary transition-all"
-        >
-          Update Menu
-        </Link>
-        <Link
           to={"orders"}
           className="w-full px-4 py-2  rounded-lg border-2 border-secondaryColor text-secondaryColor hover:bg-secondaryColor hover:text-primary transition-all"
         >
           See Orders
+        </Link>
+        <Link
+          to={"menu"}
+          className="w-full px-4 py-2  rounded-lg border-2 border-secondaryColor text-secondaryColor hover:bg-secondaryColor hover:text-primary transition-all"
+        >
+          Update Menu
         </Link>
       </div>
     </div>
