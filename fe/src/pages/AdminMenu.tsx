@@ -321,18 +321,17 @@ const AdminMenu: React.FC = () => {
       {categories.map((category) => (
         <div
           key={category._id}
-          className="bg-white shadow-md rounded-lg p-4 mb-4"
+          className="bg-white shadow-md rounded-lg p-4 mb-4 "
         >
-          <div className="flex justify-between items-center">
-            <h2 className="text-xl font-semibold">{category.category}</h2>
-            <div>
+          <div className="flex justify-between items-center ">
+            <div className="w-full">
               {editingCategoryId === category._id ? (
-                <>
+                <div className="flex ">
                   <input
                     type="text"
                     value={categoryEditValue}
                     onChange={(e) => setCategoryEditValue(e.target.value)}
-                    className="border p-1 active:opacity-80"
+                    className="border-2 rounded-md p-1 active:opacity-80 bg-white w-full"
                   />
                   <button
                     onClick={() => saveCategoryEdit(category._id)}
@@ -340,22 +339,27 @@ const AdminMenu: React.FC = () => {
                   >
                     Save
                   </button>
-                </>
+                </div>
               ) : (
-                <>
-                  <button
-                    onClick={() => startEditCategory(category)}
-                    className="bg-yellow-500 active:opacity-80 text-white px-2 py-1 rounded-lg"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => deleteCategory(category._id)}
-                    className="bg-red-500 active:opacity-80 text-white px-2 py-1 rounded-lg ml-2"
-                  >
-                    Delete
-                  </button>
-                </>
+                <div className="flex justify-between ">
+                  <h2 className="text-xl font-semibold">{category.category}</h2>
+                  {/* edit category */}
+
+                  <div className="md:w-36 flex">
+                    <button
+                      onClick={() => startEditCategory(category)}
+                      className="w-1/2 bg-yellow-500 active:opacity-80 text-white px-2 py-1 rounded-lg"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => deleteCategory(category._id)}
+                      className="w-1/2 bg-red-500 active:opacity-80 text-white px-2 py-1 rounded-lg ml-2"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
               )}
             </div>
           </div>
@@ -365,7 +369,7 @@ const AdminMenu: React.FC = () => {
             {category.items.map((item) => (
               <div
                 key={item._id}
-                className="flex justify-between items-center mt-2"
+                className="flex justify-between items-center  mt-2"
               >
                 {editingItemId === item._id ? (
                   <>
@@ -376,7 +380,7 @@ const AdminMenu: React.FC = () => {
                       className="border-2 rounded-lg p-1 w-1/2 bg-white"
                     />
                     <input
-                      type="text"
+                      type="number"
                       value={itemEditPrice}
                       onChange={(e) => setItemEditPrice(e.target.value)}
                       className="p-1 w-1/4 ml-2 bg-white border-2 rounded-lg"
@@ -391,17 +395,17 @@ const AdminMenu: React.FC = () => {
                 ) : (
                   <>
                     <div className="w-1/2">{item.name}</div>
-                    <div className="w-1/4">{item.price}</div>
-                    <div>
+                    <div className="w-1/4">$ {item.price}</div>
+                    <div className="flex w-36 gap-2">
                       <button
                         onClick={() => startEditItem(item)}
-                        className="bg-yellow-500 active:opacity-80 text-white px-2 py-1 rounded-lg"
+                        className="bg-yellow-500 w-1/2 active:opacity-80 text-white px-2 py-1 rounded-lg"
                       >
                         Edit
                       </button>
                       <button
                         onClick={() => deleteItem(category._id, item._id)}
-                        className="bg-red-500 active:opacity-80 text-white px-2 py-1 rounded-lg ml-2"
+                        className="bg-red-500 w-1/2 active:opacity-80 text-white px-2 py-1 rounded-lg "
                       >
                         Delete
                       </button>
@@ -412,28 +416,31 @@ const AdminMenu: React.FC = () => {
             ))}
 
             {/* Add New Item */}
-            <div className="mt-4">
-              <input
-                type="text"
-                value={newItems[category._id]?.name || ""}
-                onChange={(e) =>
-                  handleNewItemChange(category._id, "name", e.target.value)
-                }
-                placeholder="New item name"
-                className="p-2 w-1/2 bg-white border-2 rounded-lg"
-              />
-              <input
-                type="text"
-                value={newItems[category._id]?.price || ""}
-                onChange={(e) =>
-                  handleNewItemChange(category._id, "price", e.target.value)
-                }
-                placeholder="New item price"
-                className="p-2 w-1/4 ml-2 bg-white border-2 rounded-lg"
-              />
+            <div className="w-full flex flex-col md:flex-row justify-between mt-4">
+              <div className="w-full flex ">
+                <input
+                  type="text"
+                  value={newItems[category._id]?.name || ""}
+                  onChange={(e) =>
+                    handleNewItemChange(category._id, "name", e.target.value)
+                  }
+                  placeholder="New item name"
+                  className="p-2 md:flex-1 bg-white border-2 rounded-lg w-1/2"
+                />
+                <input
+                  type="number"
+                  value={newItems[category._id]?.price || ""}
+                  onChange={(e) =>
+                    handleNewItemChange(category._id, "price", e.target.value)
+                  }
+                  placeholder="New item price"
+                  className="p-2 md:flex-1 ml-2 bg-white border-2 rounded-lg w-1/2"
+                />
+              </div>
+
               <button
                 onClick={() => addItem(category._id)}
-                className="bg-blue-500 active:opacity-80 text-white px-4 py-2 ml-2 rounded-lg"
+                className="bg-blue-500 active:opacity-80 text-white w-full  md:w-40  py-2 mt-2 md:mt-0 md:ml-2 rounded-lg"
               >
                 Add Item
               </button>
