@@ -217,10 +217,10 @@ const Menu: React.FC = () => {
                     )
                       ? "scale-105 opacity-100" // Effect when selected
                       : "scale-100 opacity-80" // Effect when not selected
-                  } place-items-center flex text-lg sm:text-2xl text-white w-full sm:w-2/5 justify-between mb-4 cursor-pointer`}
+                  } place-items-center flex text-lg sm:text-2xl text-white w-full sm:w-2/5 justify-between mb-4`}
                 >
                   <div className="flex h-12 place-content-end place-items-center">
-                    <div className="mr-2">
+                    <div className="mr-2 ">
                       {selectedItems.find(
                         (selected) => selected.itemName === item.name
                       ) ? (
@@ -254,7 +254,10 @@ const Menu: React.FC = () => {
                         />
                       )}
                     </div>
-                    <div onClick={() => handleItemClick(item.name, item.price)}>
+                    <div
+                      className="cursor-pointer"
+                      onClick={() => handleItemClick(item.name, item.price)}
+                    >
                       {item.name}
                     </div>
                   </div>
