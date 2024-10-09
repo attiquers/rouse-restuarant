@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { PrimaryButton, SecondaryButton } from "./components/button";
 import ReviewCarousel from "./components/reviewsHOME";
 const Home = () => {
@@ -50,9 +51,9 @@ const Home = () => {
 
       {/* menu */}
       <div className="md:px-14  bg-white gap-2 md:gap-10 text-2xl font-bold text-background flex flex-col md:flex-row place-content-center items-center py-4 md:py-10">
-        <div className="text-center md:text-start">See our delicious menu</div>
+        <div className="text-center md:text-start">Track your order</div>
         <div>
-          <SecondaryButton name="Open Menu" link="menu" local={true} />
+          <SecondaryButton name="Track Order" link="trackorder" local={true} />
         </div>
       </div>
 
@@ -85,10 +86,10 @@ const Home = () => {
           {/* leftside */}
           <div className="flex flex-col items-center md:items-start text-center md:text-start w-full md:w-auto px-10 pt-20">
             <div className="text-4xl white flex flex-col  gap-5 text-zinc-200 font-bold">
-              <div className="">Menu</div>
-              <div>Order</div>
-              <div>Contact</div>
-              <div>Locations</div>
+              <Link to="menu">Menu</Link>
+              <Link to="trackorder">Track Order</Link>
+              <Link to="contact">Contact</Link>
+              <Link to="contact">Admin Controls</Link>
             </div>
             <div className="flex gap-5 pt-5 ">
               <div className="w-16  hover:scale-110 hover:cursor-pointer active:scale-90 transition-transform rounded-2xl aspect-square bg-background  flex items-center place-content-center p-4 ">

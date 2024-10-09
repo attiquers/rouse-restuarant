@@ -2,8 +2,23 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const Navigation = () => {
+// interface OrderItem {
+//   itemName: string;
+//   quantity: number;
+//   price: number;
+// }
+
+const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  // const [selectedItems, setSelectedItems] = useState<OrderItem[]>([]);
+
+  // useEffect(() => {
+  //   const savedItems = localStorage.getItem("selectedItems");
+  //   if (savedItems) {
+  //     setSelectedItems(JSON.parse(savedItems));
+  //   }
+  //   console.log(selectedItems);
+  // }, []);
 
   const toggleNavbar = () => setIsOpen(!isOpen);
 
@@ -11,6 +26,8 @@ const Navigation = () => {
 
   return (
     <div>
+      {/* {selectedItems.length ? <div>meow</div> : <div></div>} */}
+
       {/* Menu Icon */}
       <div
         className="absolute right-10 top-10 z-20 cursor-pointer"
@@ -116,7 +133,7 @@ const Navigation = () => {
             </li>
           </ul>
           <div className="h-full place-content-center hidden md:flex">
-            <img src="/logo.svg" className="w-96 aspect-auto" alt="Logo" />
+            <img src="/vite.svg" className="w-96 aspect-auto" alt="Logo" />
           </div>
         </div>
       </div>
