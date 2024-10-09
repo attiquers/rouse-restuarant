@@ -32,7 +32,7 @@ const PrimaryButton: React.FC<ButtonProps> = ({ name, link, local }) => {
     <>
       {local ? (
         <Link to={link}>
-          <button className="text-[1.4rem] font-bold px-8 py-4 bg-background text-secondaryColor border-secondaryColor border-2 rounded-2xl hover:bg-secondaryColor hover:text-background transition-all duration-75 shadow-md  active:translate-y-1 hover:shadow-sm shadow-[#363636]">
+          <button className="text-[1.4rem] font-bold px-4 md:px-8 py-2 md:py-4 bg-background text-secondaryColor border-secondaryColor border-2 rounded-2xl hover:bg-secondaryColor hover:text-background transition-all duration-75 shadow-md  active:translate-y-1 hover:shadow-sm shadow-[#363636]">
             {name}
           </button>
         </Link>

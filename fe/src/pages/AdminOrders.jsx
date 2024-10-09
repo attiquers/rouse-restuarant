@@ -220,9 +220,9 @@ const AdminOrders = () => {
           <Loader2 className="animate-spin text-secondaryColor w-20 h-20 "/>
         </div>
        :''}
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto overflow-y-auto h-screen">
         <table className="min-w-full bg-white border border-gray-200">
-          <thead className="bg-gray-100">
+          <thead className="bg-gray-100 sticky top-0">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                 Name

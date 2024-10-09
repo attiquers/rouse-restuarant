@@ -30,7 +30,7 @@ const Contact = () => {
   // };
 
   return (
-    <div className="text-6xl text-white">
+    <div className="text-6xl text-white pb-10">
       <div className="p-6 sm:p-14">
         <div className="flex gap-5 items-center">
           <div>
@@ -94,12 +94,22 @@ const Contact = () => {
         </form> */}
 
         <div className="  w-1/2 h-fit text-2xl  text-white ml-16 rounded-lg">
-          <h2 className="text-4xl font-bold  ">Our Location</h2>
+          <h2 className="text-4xl font-bold  ">Nichijou Location</h2>
           <div className="flex flex-col gap-1 pt-4 ">
             <p>Skyline Public High School</p>
             <p>1234 Main St,</p>
             <p>Kyoto, Japan</p>
             <p>Phone: (123) 456-7890</p>
+          </div>
+        </div>
+
+        <div className="  w-1/2 h-fit text-2xl  text-white ml-16 rounded-lg">
+          <h2 className="text-4xl font-bold  ">Cromartie Location</h2>
+          <div className="flex flex-col gap-1 pt-4 ">
+            <p>Cromartie High School</p>
+            <p>2214 Saiki St,</p>
+            <p>Osaka, Japan</p>
+            <p>Phone: (233) 241-7123</p>
           </div>
         </div>
 
@@ -116,10 +126,12 @@ const Contact = () => {
         <div className="  w-1/2 h-fit text-2xl  text-white ml-16 rounded-lg">
           <h2 className="text-4xl font-bold  ">Social Media</h2>
           <div className="flex gap-5 pt-2">
-            <div className="w-16 aspect-square bg-secondaryColor/90 rounded-lg hover:bg-secondaryColor active:hover:bg-secondaryColor active:scale-90 transition-transform"></div>
-            <div className="w-16 aspect-square bg-secondaryColor/90 rounded-lg hover:bg-secondaryColor active:hover:bg-secondaryColor active:scale-90 transition-transform"></div>
-            <div className="w-16 aspect-square bg-secondaryColor/90 rounded-lg hover:bg-secondaryColor active:hover:bg-secondaryColor active:scale-90 transition-transform"></div>
-            <div className="w-16 aspect-square bg-secondaryColor/90 rounded-lg hover:bg-secondaryColor active:hover:bg-secondaryColor active:scale-90 transition-transform"></div>
+            <div className="w-16 bg-secondaryColor/80  hover:scale-110 hover:cursor-pointer active:scale-90 transition-transform rounded-2xl aspect-square   flex items-center place-content-center p-4 ">
+              <img src="/fb.svg" className="w-4 " alt="" />
+            </div>
+            <div className="w-16 bg-secondaryColor/80 hover:scale-110 hover:cursor-pointer  active:scale-90 transition-transform rounded-2xl aspect-square   flex items-center place-content-center p-4">
+              <img src="/ig.svg" className="w-10 text" alt="" />
+            </div>
           </div>
         </div>
       </div>

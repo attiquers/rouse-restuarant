@@ -1,3 +1,4 @@
+import { Loader2 } from "lucide-react";
 import React, { useState } from "react";
 
 const TrackOrder = () => {
@@ -5,6 +6,7 @@ const TrackOrder = () => {
   const [orders, setOrders] = useState([]); // State to hold fetched orders
   const [customText, setCustomText] = useState(""); // State for custom text input
   const [errorMessage, setErrorMessage] = useState(""); // State for error messages
+  const [loading, setLoading] = useState(false);
 
 
   // const BACKEND_URI = "http://localhost:5000/api";
@@ -12,6 +14,7 @@ const TrackOrder = () => {
 
 
   const handleTrackOrder = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         `${BACKEND_URI}/ordersByEmail?email=${encodeURIComponent(
@@ -31,7 +34,11 @@ const TrackOrder = () => {
   
       setOrders(ordersData); // Set the sorted orders to state
       setErrorMessage(""); // Clear any previous error messages
+      setLoading(false); // Stop loading if there are no items
+
     } catch (error) {
+      setLoading(false); // Stop loading if there are no items
+
       setErrorMessage(error.message);
       console.log(error);
       setOrders([]); // Clear orders in case of an error
@@ -90,9 +97,15 @@ const TrackOrder = () => {
           <div className="flex justify-end mt-2">
             <button
               onClick={handleTrackOrder}
-              className="bg-secondaryColor text-background py-2 px-4 rounded hover:bg-secondaryHover"
+              className="bg-secondaryColor text-background min-w-32 py-2 px-4 rounded hover:bg-secondaryHover"
             >
-              Track Order
+              {
+                loading ? (
+                  <div className="w-full h-fit flex  place-content-center">
+                    <Loader2 className="animate-spin text-white  " />
+                  </div>):
+              "Track Order"
+              }
             </button>
           </div>
           {errorMessage && (

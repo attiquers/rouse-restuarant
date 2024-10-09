@@ -75,11 +75,11 @@ const Navigation = () => {
                 />
               </div>
               <Link
-                to="order"
+                to="trackorder"
                 className="block bg-[#d4a808] hover:translate-x-20 transition-transform duration-300"
                 onClick={closeNavbar}
               >
-                Order
+                Track Order
               </Link>
             </li>
             <li>

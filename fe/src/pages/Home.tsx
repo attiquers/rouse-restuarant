@@ -17,7 +17,7 @@ const Home = () => {
       </div>
 
       {/* find us */}
-      <div className="px-20 flex-col md:flex-row  bg-white gap-4 md:gap-10 text-2xl font-bold text-background flex place-content-center items-center py-10">
+      <div className="md:px-20 flex-col md:flex-row  bg-white gap-4 md:gap-10 text-2xl font-bold text-background flex place-content-center items-center py-6 md:py-10">
         <div className="w-full md:w-auto  text-center">
           Find Rouse Restaurant
         </div>
@@ -35,7 +35,7 @@ const Home = () => {
             alt=""
           />
         </div>
-        <div className="h-1/2 md:h-auto md:w-1/2 flex flex-col place-content-center items-center text-white">
+        <div className="h-1/2 pb-4 md:h-auto md:w-1/2 flex flex-col place-content-center items-center text-white">
           <div className="pt-5 w-4/6 text-center text-5xl md:text-7xl font-bold ">
             Crafted for Cravings
           </div>
@@ -49,7 +49,7 @@ const Home = () => {
       </div>
 
       {/* menu */}
-      <div className="px-14 md:px-0 bg-white gap-4 md:gap-10 text-2xl font-bold text-background flex flex-col md:flex-row place-content-center items-center py-10">
+      <div className="md:px-14  bg-white gap-2 md:gap-10 text-2xl font-bold text-background flex flex-col md:flex-row place-content-center items-center py-4 md:py-10">
         <div className="text-center md:text-start">See our delicious menu</div>
         <div>
           <SecondaryButton name="Open Menu" link="menu" local={true} />
@@ -57,7 +57,7 @@ const Home = () => {
       </div>
 
       {/* reviews */}
-      <div className="relative h-screen overflow-hidden  flex">
+      <div className="relative min-h-screen overflow-hidden  flex">
         <img
           src="/showBurger.webp"
           className="absolute h-full md:h-auto md:w-full object-top opacity-10"
