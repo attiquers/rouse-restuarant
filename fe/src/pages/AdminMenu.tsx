@@ -21,7 +21,9 @@ const AdminMenu: React.FC = () => {
   const [newItems, setNewItems] = useState<{
     [key: string]: { name: string; price: string };
   }>({});
+  // @ts-ignore
   const [newItemName, setNewItemName] = useState("");
+  // @ts-ignore
   const [newItemPrice, setNewItemPrice] = useState("");
   // const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [editingCategoryId, setEditingCategoryId] = useState<string | null>(

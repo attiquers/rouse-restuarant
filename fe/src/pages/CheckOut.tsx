@@ -3,16 +3,16 @@ import { Loader2 } from "lucide-react";
 
 import axios from "axios"; // Import axios
 
-interface Item {
-  name: string;
-  price: number; // Adjusting price to be a number for calculations
-}
+// interface Item {
+//   name: string;
+//   price: number; // Adjusting price to be a number for calculations
+// }
 
-interface Category {
-  category: string;
-  icon: string;
-  items: Item[];
-}
+// interface Category {
+//   category: string;
+//   icon: string;
+//   items: Item[];
+// }
 
 interface OrderItem {
   itemName: string;
