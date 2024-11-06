@@ -138,6 +138,8 @@ const Order: React.FC = () => {
       statusInfo: "We will call you for order confirmation shortly.",
     };
 
+    console.log(extraNote);
+
     try {
       const response = await fetch(`${BACKEND_URI}`, {
         method: "POST",

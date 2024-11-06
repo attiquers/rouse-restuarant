@@ -56,6 +56,7 @@ const CheckOut: React.FC = () => {
     const order = {
       customerName: customerInfo.name,
       customerEmail: customerInfo.email,
+      customerNote: customerInfo.note || "",
       orderItems,
       totalAmount: totalPrice,
       status: "Awaiting Confirmation",
