@@ -68,6 +68,7 @@ const CheckOut: React.FC = () => {
       setLoading(false);
       console.log(`Order submitted successfully: ${response.data.orderId}`);
       localStorage.setItem("selectedItems", "");
+      localStorage.setItem("customerName", customerInfo.name); // Save customer name in local storage
       window.location.href = "/success";
     } catch (error: any) {
       const errorMessage =

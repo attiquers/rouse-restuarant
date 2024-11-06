@@ -24,6 +24,10 @@ const orderSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  customerNote: {
+    type: String,
+    default: "",
+  },
   orderDate: {
     type: Date,
     default: Date.now,
@@ -39,8 +43,8 @@ const orderSchema = new mongoose.Schema({
   },
   statusInfo: {
     type: String,
-    default: "Eg like your order will take 10-15 minutes"
-  }
+    default: "Eg like your order will take 10-15 minutes",
+  },
 });
 
 const Order = mongoose.model("Order", orderSchema);
