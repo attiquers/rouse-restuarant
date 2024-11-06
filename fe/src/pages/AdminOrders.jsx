@@ -1,24 +1,14 @@
 import { useState, useEffect } from "react";
 import { Loader2 } from "lucide-react";
 
-// Modal Component for showing ordered items and the note
-const OrderItemsModal = ({ show, handleClose, orderItems, note }) => {
+// Modal Component for showing ordered items
+const OrderItemsModal = ({ show, handleClose, orderItems }) => {
   if (!show) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
       <div className="bg-white rounded-lg p-6 w-full max-w-md overflow-y-auto">
         <h2 className="text-lg font-bold mb-4">Ordered Items</h2>
-
-        {/* Display the note if available */}
-        {note && (
-          <div className="mb-4 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-gray-800">
-            <p>
-              <strong>Note:</strong> {note}
-            </p>
-          </div>
-        )}
-
         <ul className="space-y-2">
           {orderItems.map((item, index) => (
             <li key={index} className="flex justify-between">
@@ -139,6 +129,7 @@ const AdminOrders = () => {
     const fetchOrders = async () => {
       try {
         const response = await fetch(`${BACKEND_URI}/orders`);
+
         const data = await response.json();
 
         if (!response.ok) {
@@ -162,10 +153,9 @@ const AdminOrders = () => {
     fetchOrders();
   }, []);
 
-  // Function to open modal and show ordered items and note
-  const handleShowItems = (items, note) => {
+  // Function to open modal and show ordered items
+  const handleShowItems = (items) => {
     setSelectedItems(items);
-    setSelectedOrder({ ...selectedOrder, note });
     setShowModal(true);
   };
 
@@ -221,7 +211,7 @@ const AdminOrders = () => {
 
       {loading ? (
         <div className="absolute inset-0 flex items-center justify-center h-screen w-screen">
-          <Loader2 className="animate-spin text-secondaryColor w-20 h-20" />
+          <Loader2 className="animate-spin text-secondaryColor w-20 h-20 " />
         </div>
       ) : (
         ""
@@ -246,37 +236,44 @@ const AdminOrders = () => {
                 Status
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                View Items
+                Status Info
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Actions
+                Orders
               </th>
             </tr>
           </thead>
-          <tbody className="text-sm">
+          <tbody className="bg-white divide-y divide-gray-200">
             {orders.map((order) => (
-              <tr key={order._id} className="border-b hover:bg-gray-50">
-                <td className="px-6 py-4 text-gray-800">{order.name}</td>
-                <td className="px-6 py-4 text-gray-800">{order.email}</td>
-                <td className="px-6 py-4 text-gray-800">{order.orderTime}</td>
-                <td className="px-6 py-4 text-gray-800">{order.orderDate}</td>
-                <td className="px-6 py-4 text-gray-800">{order.status}</td>
-                <td className="px-6 py-4">
+              <tr key={order._id}>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {order.customerName}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {order.customerEmail}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {new Date(order.orderDate).toLocaleTimeString()}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {new Date(order.orderDate).toLocaleDateString()}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">{order.status}</td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {order.statusInfo}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
                   <button
-                    onClick={() =>
-                      handleShowItems(order.orderItems, order.note)
-                    }
-                    className="text-blue-600 hover:underline"
+                    onClick={() => handleShowItems(order.orderItems)}
+                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mr-2"
                   >
                     View Items
                   </button>
-                </td>
-                <td className="px-6 py-4">
                   <button
                     onClick={() => handleEditOrder(order)}
-                    className="text-blue-600 hover:underline"
+                    className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
                   >
-                    Edit Status
+                    Edit
                   </button>
                 </td>
               </tr>
@@ -285,15 +282,14 @@ const AdminOrders = () => {
         </table>
       </div>
 
-      {/* Show Order Items Modal */}
+      {/* Modal to show order items */}
       <OrderItemsModal
         show={showModal}
         handleClose={handleCloseModal}
         orderItems={selectedItems}
-        note={selectedOrder?.note}
       />
 
-      {/* Edit Order Status Modal */}
+      {/* Modal to edit order status */}
       <EditOrderModal
         show={showEditModal}
         handleClose={handleCloseEditModal}
