@@ -117,4 +117,21 @@ router.delete("/orders/:id", async (req, res) => {
   }
 });
 
+// DELETE all orders
+router.delete("/orders", async (req, res) => {
+  try {
+    const result = await Order.deleteMany({}); // Delete all documents in the collection
+
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ message: "No orders found to delete" });
+    }
+
+    res
+      .status(200)
+      .json({ message: `${result.deletedCount} orders deleted successfully` });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 module.exports = router;
