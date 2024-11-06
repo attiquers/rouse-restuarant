@@ -58,8 +58,8 @@ const CheckOut: React.FC = () => {
       customerEmail: customerInfo.email,
       orderItems,
       totalAmount: totalPrice,
-      status: "Pending",
-      statusInfo: "Your order will be ready soon.",
+      status: "Awaiting Confirmation",
+      statusInfo: "We will call you for order confirmation shortly.",
     };
 
     try {

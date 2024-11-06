@@ -59,7 +59,7 @@ router.post("/orders", async (req, res) => {
   const order = new Order({
     customerName: req.body.customerName,
     customerEmail: req.body.customerEmail,
-    customerNote: req.body.customerNote || "", // Default to empty string if not provided
+    customerNote: req.body.customerNote, // Default to empty string if not provided
     orderDate: req.body.orderDate || Date.now(), // Default to current date if not provided
     orderItems: req.body.orderItems,
     totalAmount: req.body.totalAmount,
