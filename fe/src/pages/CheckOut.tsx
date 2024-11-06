@@ -1,18 +1,6 @@
 import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
-
-import axios from "axios"; // Import axios
-
-// interface Item {
-//   name: string;
-//   price: number; // Adjusting price to be a number for calculations
-// }
-
-// interface Category {
-//   category: string;
-//   icon: string;
-//   items: Item[];
-// }
+import axios from "axios";
 
 interface OrderItem {
   itemName: string;
@@ -56,7 +44,7 @@ const CheckOut: React.FC = () => {
     const order = {
       customerName: customerInfo.name,
       customerEmail: customerInfo.email,
-      customerNote: customerInfo.note || "",
+      customerNote: customerInfo.note || "", // Ensure the note is passed here
       orderItems,
       totalAmount: totalPrice,
       status: "Awaiting Confirmation",
@@ -68,7 +56,7 @@ const CheckOut: React.FC = () => {
 
       setLoading(false);
       console.log(`Order submitted successfully: ${response.data.orderId}`);
-      localStorage.setItem("selectedItems", "");
+      localStorage.setItem("selectedItems", ""); // Clear selected items from local storage
       localStorage.setItem("customerName", customerInfo.name); // Save customer name in local storage
       window.location.href = "/success";
     } catch (error: any) {
@@ -92,7 +80,7 @@ const CheckOut: React.FC = () => {
       email: formData.get("email") as string,
       phone: formData.get("phone") as string,
       address: formData.get("address") as string,
-      note: (formData.get("note") as string) || undefined, // Ensure note can be optional
+      note: (formData.get("note") as string) || undefined, // Ensure the note is captured
     };
 
     // Basic validation
@@ -175,7 +163,7 @@ const CheckOut: React.FC = () => {
             >
               {loading ? (
                 <div className="w-full h-fit flex  place-content-center">
-                  <Loader2 className="animate-spin text-white  " />
+                  <Loader2 className="animate-spin text-white" />
                 </div>
               ) : (
                 "Submit Order"

@@ -1,14 +1,24 @@
 import { useState, useEffect } from "react";
-import {Loader2 } from 'lucide-react'
+import { Loader2 } from "lucide-react";
 
-// Modal Component for showing ordered items
-const OrderItemsModal = ({ show, handleClose, orderItems }) => {
+// Modal Component for showing ordered items and the note
+const OrderItemsModal = ({ show, handleClose, orderItems, note }) => {
   if (!show) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
       <div className="bg-white rounded-lg p-6 w-full max-w-md overflow-y-auto">
         <h2 className="text-lg font-bold mb-4">Ordered Items</h2>
+
+        {/* Display the note if available */}
+        {note && (
+          <div className="mb-4 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-gray-800">
+            <p>
+              <strong>Note:</strong> {note}
+            </p>
+          </div>
+        )}
+
         <ul className="space-y-2">
           {orderItems.map((item, index) => (
             <li key={index} className="flex justify-between">
@@ -129,7 +139,6 @@ const AdminOrders = () => {
     const fetchOrders = async () => {
       try {
         const response = await fetch(`${BACKEND_URI}/orders`);
-      
         const data = await response.json();
 
         if (!response.ok) {
@@ -153,9 +162,10 @@ const AdminOrders = () => {
     fetchOrders();
   }, []);
 
-  // Function to open modal and show ordered items
-  const handleShowItems = (items) => {
+  // Function to open modal and show ordered items and note
+  const handleShowItems = (items, note) => {
     setSelectedItems(items);
+    setSelectedOrder({ ...selectedOrder, note });
     setShowModal(true);
   };
 
@@ -180,17 +190,13 @@ const AdminOrders = () => {
   // Function to update order status and info
   const handleUpdateOrder = async (orderId, updatedData) => {
     try {
-      const response = await fetch(
-
-        `${BACKEND_URI}/orders/${orderId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedData),
-        }
-      );
+      const response = await fetch(`${BACKEND_URI}/orders/${orderId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedData),
+      });
 
       if (!response.ok) {
         throw new Error("Failed to update order");
@@ -210,16 +216,16 @@ const AdminOrders = () => {
 
   return (
     <div className="bg-gray-200 p-6">
-      <h1 className="text-4xl text-center font-bold mb-6">
-        All Orders
-      </h1>
+      <h1 className="text-4xl text-center font-bold mb-6">All Orders</h1>
       {error && <p className="text-red-500 mb-4">{error}</p>}
 
-      {loading? 
+      {loading ? (
         <div className="absolute inset-0 flex items-center justify-center h-screen w-screen">
-          <Loader2 className="animate-spin text-secondaryColor w-20 h-20 "/>
+          <Loader2 className="animate-spin text-secondaryColor w-20 h-20" />
         </div>
-       :''}
+      ) : (
+        ""
+      )}
       <div className="overflow-x-auto overflow-y-auto h-screen">
         <table className="min-w-full bg-white border border-gray-200">
           <thead className="bg-gray-100 sticky top-0">
@@ -240,44 +246,37 @@ const AdminOrders = () => {
                 Status
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Status Info
+                View Items
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Orders
+                Actions
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="text-sm">
             {orders.map((order) => (
-              <tr key={order._id}>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {order.customerName}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {order.customerEmail}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {new Date(order.orderDate).toLocaleTimeString()}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {new Date(order.orderDate).toLocaleDateString()}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">{order.status}</td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {order.statusInfo}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+              <tr key={order._id} className="border-b hover:bg-gray-50">
+                <td className="px-6 py-4 text-gray-800">{order.name}</td>
+                <td className="px-6 py-4 text-gray-800">{order.email}</td>
+                <td className="px-6 py-4 text-gray-800">{order.orderTime}</td>
+                <td className="px-6 py-4 text-gray-800">{order.orderDate}</td>
+                <td className="px-6 py-4 text-gray-800">{order.status}</td>
+                <td className="px-6 py-4">
                   <button
-                    onClick={() => handleShowItems(order.orderItems)}
-                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mr-2"
+                    onClick={() =>
+                      handleShowItems(order.orderItems, order.note)
+                    }
+                    className="text-blue-600 hover:underline"
                   >
                     View Items
                   </button>
+                </td>
+                <td className="px-6 py-4">
                   <button
                     onClick={() => handleEditOrder(order)}
-                    className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
+                    className="text-blue-600 hover:underline"
                   >
-                    Edit
+                    Edit Status
                   </button>
                 </td>
               </tr>
@@ -286,14 +285,15 @@ const AdminOrders = () => {
         </table>
       </div>
 
-      {/* Modal to show order items */}
+      {/* Show Order Items Modal */}
       <OrderItemsModal
         show={showModal}
         handleClose={handleCloseModal}
         orderItems={selectedItems}
+        note={selectedOrder?.note}
       />
 
-      {/* Modal to edit order status */}
+      {/* Edit Order Status Modal */}
       <EditOrderModal
         show={showEditModal}
         handleClose={handleCloseEditModal}
