@@ -128,13 +128,14 @@ const Order: React.FC = () => {
     const order = {
       customerName: userInfo.name,
       customerEmail: userInfo.email,
+      customerNote: extraNote,
       orderItems, // Use the mapped orderItems
       totalAmount: orderItems.reduce(
         (total, item) => total + item.quantity * item.price,
         0
       ),
       status: "Pending",
-      statusInfo: extraNote || "Your order will be ready soon.",
+      statusInfo: "We will call you for order confirmation shortly.",
     };
 
     try {
