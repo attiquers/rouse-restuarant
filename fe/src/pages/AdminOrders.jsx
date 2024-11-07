@@ -261,8 +261,12 @@ const AdminOrders = () => {
                   {order.customerEmail}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {new Date(order.orderTime).toLocaleTimeString()}
+                  {new Date(order.orderDate).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
                 </td>
+
                 <td className="px-6 py-4 whitespace-nowrap">
                   {new Date(order.orderDate).toLocaleDateString()}
                 </td>
