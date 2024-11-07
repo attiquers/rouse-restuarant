@@ -19,6 +19,16 @@ const OrderItemsModal = ({ show, handleClose, orderItems, customerNote }) => {
             </li>
           ))}
         </ul>
+        {/* Calculate total price */}
+        <div className="mt-4 flex justify-between font-bold">
+          <span>Total Price:</span>
+          <span>
+            $
+            {orderItems
+              .reduce((total, item) => total + item.quantity * item.price, 0)
+              .toFixed(2)}
+          </span>
+        </div>
         <div className="mt-4">
           <h3 className="font-bold">Customer Note:</h3>
           <p>{customerNote}</p>
