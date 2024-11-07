@@ -213,7 +213,7 @@ const AdminOrders = () => {
   };
 
   return (
-    <div className="bg-gray-200 p-6">
+    <div className="bg-gray-200 p-6 min-h-screen">
       <h1 className="text-4xl text-center font-bold mb-6">All Orders</h1>
       {error && <p className="text-red-500 mb-4">{error}</p>}
 
@@ -224,7 +224,7 @@ const AdminOrders = () => {
       ) : (
         ""
       )}
-      <div className="overflow-x-auto overflow-y-auto h-screen">
+      <div className="overflow-x-auto overflow-y-auto ">
         <table className="min-w-full bg-white border border-gray-200">
           <thead className="bg-gray-100 sticky top-0">
             <tr>
