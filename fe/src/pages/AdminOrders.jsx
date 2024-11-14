@@ -3,6 +3,8 @@ import { Loader2 } from "lucide-react";
 
 // Modal Component for showing ordered items and customer notes
 const OrderItemsModal = ({ show, handleClose, orderItems, customerNote }) => {
+  document.title = "All Orders";
+
   if (!show) return null;
 
   return (

@@ -36,6 +36,8 @@ const AdminMenu: React.FC = () => {
   const [itemOldPrice, setItemOldPrice] = useState("");
   const [itemOldName, setItemOldName] = useState("");
 
+  document.title = "Update Menu";
+
   // New state for confirmation
   const [confirmDelete, setConfirmDelete] = useState<boolean>(false);
   const [itemToDelete, setItemToDelete] = useState<{

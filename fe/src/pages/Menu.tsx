@@ -33,6 +33,7 @@ const Menu: React.FC = () => {
   const [selectedItems, setSelectedItems] = useState<OrderItem[]>([]);
 
   const BACKEND_URI = "https://rouse-be.vercel.app/api/menu";
+  document.title = "Menu";
 
   useEffect(() => {
     const fetchMenuData = async () => {

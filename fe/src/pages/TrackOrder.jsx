@@ -8,10 +8,10 @@ const TrackOrder = () => {
   const [errorMessage, setErrorMessage] = useState(""); // State for error messages
   const [loading, setLoading] = useState(false);
 
-
   // const BACKEND_URI = "http://localhost:5000/api";
   const BACKEND_URI = "https://rouse-be.vercel.app/api";
 
+  document.title = "Track Order";
 
   const handleTrackOrder = async () => {
     setLoading(true);
@@ -21,21 +21,22 @@ const TrackOrder = () => {
           email
         )}&customText=${encodeURIComponent(customText)}`
       );
-  
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message);
       }
-  
+
       let ordersData = await response.json();
-      
+
       // Sort orders by orderDate in descending order (most recent date and time first)
-      ordersData = ordersData.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate));
-  
+      ordersData = ordersData.sort(
+        (a, b) => new Date(b.orderDate) - new Date(a.orderDate)
+      );
+
       setOrders(ordersData); // Set the sorted orders to state
       setErrorMessage(""); // Clear any previous error messages
       setLoading(false); // Stop loading if there are no items
-
     } catch (error) {
       setLoading(false); // Stop loading if there are no items
 
@@ -44,7 +45,6 @@ const TrackOrder = () => {
       setOrders([]); // Clear orders in case of an error
     }
   };
-  
 
   const formatOrderItems = (items) => {
     return items
@@ -99,13 +99,13 @@ const TrackOrder = () => {
               onClick={handleTrackOrder}
               className="bg-secondaryColor text-background min-w-32 py-2 px-4 rounded hover:bg-secondaryHover"
             >
-              {
-                loading ? (
-                  <div className="w-full h-fit flex  place-content-center">
-                    <Loader2 className="animate-spin text-white  " />
-                  </div>):
-              "Track Order"
-              }
+              {loading ? (
+                <div className="w-full h-fit flex  place-content-center">
+                  <Loader2 className="animate-spin text-white  " />
+                </div>
+              ) : (
+                "Track Order"
+              )}
             </button>
           </div>
           {errorMessage && (

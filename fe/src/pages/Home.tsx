@@ -45,7 +45,7 @@ const Home = () => {
             hit the spot. Whether classic or creative, each one is a feast for
             the senses
           </div>
-          <PrimaryButton name="Order Now" link="order" local={true} />
+          <PrimaryButton name="Order Now" link="menu" local={true} />
         </div>
       </div>
 

@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 
 const Admin = () => {
+  document.title = "Admin Controls";
+
   return (
     <div>
       <div className="p-6 sm:p-14">

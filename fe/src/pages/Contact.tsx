@@ -29,6 +29,8 @@ const Contact = () => {
   //   console.log(data); // Handle form submission (e.g., send data to backend)
   // };
 
+  document.title = "Contact Us";
+
   return (
     <div className="text-6xl text-white pb-10">
       <div className="p-6 sm:p-14">
